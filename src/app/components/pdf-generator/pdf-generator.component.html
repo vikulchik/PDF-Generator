@@ -1,0 +1,26 @@
+<div class="px-6 py-10 flex flex-col items-center">
+  <input
+    class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-96 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-5 ring-1 ring-slate-200 shadow-sm mb-4"
+    aria-label="Filter projects" placeholder="Введіть текст для нової PDF" [formControl]="text">
+  <button class="rounded-md btn--primary w-44 text-sm px-2.5 py-1.5" (click)="generate();">
+    Конвертувати в PDF
+  </button>
+</div>
+
+<div class="flex w-2/3 justify-between mx-auto">
+  <div>
+    <h1 class="text-lg mb-2 font-semibold text-gray-900">Історія створення PDF файлів</h1>
+    <ul>
+      <li *ngFor="let item of history" class="flex flex-col items-center mb-2">
+        <span> {{ item.version.slice(0, 5)}} - {{ item.date | date:'short'}}</span>
+        <button (click)="generate({ history: item, addToHistory: false })" class="rounded-md bg-indigo-600 px-2 py-1 text-sm text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 bg-white">Переглянути PDF</button>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h1 class="text-lg mb-2 font-semibold text-gray-900 flex">Перегляд створеного PDF файлу</h1>
+    <div style="width: 600px; height: 500px" class="border-4 border-solid border-gray-600">
+      <ng2-pdfjs-viewer #pdfViewer></ng2-pdfjs-viewer>
+    </div>
+  </div>
+</div>
